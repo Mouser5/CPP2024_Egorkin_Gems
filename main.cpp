@@ -1,72 +1,39 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include "Header.h"
 using namespace std;
 
-void ChekField() {
-
+void CheckRow(const vector <char> field, const int size,const int col) {
+    for (int i = 0; i < size - 2; i++) {
+        if ((field[i] == field[i + 1]) && (field[i] == field[i + 2]))
+            cout <<"Row :"<< i+1<<"/"<<col+1 << field[i] << endl;
+    }
 }
 
-void FromIntToChar(const int temp,char & color) {
-    if (temp == 1) {
-        color = 'R';
-        return;
+void CheckCol(const vector <vector <char>> field,const int size,const int col) {
+    for (int i = 0; i < size - 2; i++) {
+        if ((field[i][col] == field[i+1][col]) && (field[i][col] == field[i+2][col]))
+            cout <<"Col :"<< i+1<<"/" << col + 1 << field[i][col] << endl;
     }
-    if (temp == 2) {
-        color = 'B';
-        return;
-    }
-    if (temp == 3) {
-        color = 'G';
-        return;
-    }
-    if (temp == 4) {
-        color = 'O';
-        return;
-    }
-    if (temp == 5) {
-        color = 'Y';
-        return;
-    }
-    color = 'P';
-    return;
- }
+}
 
-void FillField(vector <vector <char>>& field, const int size) {
-    int temp = 0;
+void CheckField(vector <vector <char>> &field,const int size) {
     for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            temp = rand() % 6 + 1;
-            FromIntToChar(temp, field[i][j]);
-        }
+        CheckRow(field[i], size,i);
+        CheckCol(field, size, i);
     }
 }
-
-void CreateField(vector < vector <char>> &field, const int size) {
-    field.resize(size);
-    for (int i = 0; i < size; i++) {
-        field[i].resize(size);
-    }
-}
-
-void PrintField(vector <vector <char>> field,  const int size) {
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            cout << field[i][j]<<" ";
-        }
-        cout << endl;
-    }
-}
-
 
 
 
 int main()
 {
     vector <vector <char>> field;
-    int size = 3;
+    int size = 6;
     CreateField(field, size);
     FillField(field, size);
     PrintField(field, size);
+    CheckField(field, size);
 }
 
