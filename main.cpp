@@ -4,16 +4,9 @@
 #include "Header.h"
 using namespace std;
 
-struct Bonys
-{
-    int x;
-    int y;
-    int type;
-};
-
 void Prog() {
     vector <vector <char>> field;
-    int size = 6;
+    int size = 10;
     CreateField(field, size);
     FillField(field, size);
     PrintField(field, size);
